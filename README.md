@@ -20,7 +20,7 @@ After you have everything you need simply enter "npm start" in the terminal on t
 
 ## Accessing the game
 
-If you are running the game on your local machine, go to "https://localhost:3000" to play the game. If you are playing to game over the internet, with the server running on a different machine, run the NGROK script on the host machine and visit "https://{enter-tcp-address-here-without-the-tcp://}". The browser might say that the website is not secure. Click on advanced and proceed anyway. This is because I signed the SSL certificate and the browser does not recognise \ me, which makes the certificate not trustable.
+If you are running the game on your local machine, go to "https://localhost:3000" to play the game. If you are playing to game over the internet, with the server running on a different machine, run the NGROK script on the host machine and visit "https://{enter-tcp-address-here-without-the-tcp://}". The browser might say that the website is not secure. Click on advanced and proceed anyway. This is because I signed the SSL certificate and the browser does not recognise me, which makes the certificate not trustable.
 
 ## Playing the game
 
