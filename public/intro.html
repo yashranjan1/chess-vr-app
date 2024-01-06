@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+        <script src="intro.js"></script>
+    </head>
+    <body>
+        <a-scene>
+            <a-assets>
+              <!-- Sound assets -->
+              <audio id="select" src="./sound-assets/select.mp3"></audio>
+              <audio id="deselect" src="./sound-assets/deselect.mp3"></audio>
+              <audio id="place" src="./sound-assets/place.mp3"></audio>
+            </a-assets>
+            
+            <a-entity id="rig" position="0 3 0">
+                <a-entity camera 
+                wasd-controls="fly:true" 
+                look-controls="pointerLockEnabled: true">
+                    <a-entity id="win-cam" move-tool-2 raycaster="objects: .chess-piece, .tile-piece , .back, .next, .skip" position="0 0 -0.01" geometry="primitive:circle; radius:0.00005;" material=" color: blue;"></a-entity>
+                </a-entity>
+                
+                <a-entity oculus-touch-controls="hand: left" id="left-hand"></a-entity>
+                <a-entity move-tool-2 laser-controls="hand: right" id="right-hand" raycaster="objects: .chess-piece, .tile-piece , .back, .next, .skip;  lineColor: red;"></a-entity>
+            </a-entity>
+            <a-entity position="0 -5 -10" environment="preset: goaland"></a-entity>
+            <a-box side='back' color="black" position="-6 3 -10" class="back">
+                <a-text align="center" value="Back"></a-text>
+            </a-box>
+            <a-box side='back' color="black" position="6 3 -10" class="next">
+                <a-text align="center" value="Next"></a-text>
+            </a-box>
+            <a-box side='back' color="black" position="0 -1 -6" rotation='-45 0 0' class="skip">
+                <a-text align="center" value="Skip"></a-text>
+            </a-box>
+            
+            <a-entity position="0 -0.5 -7">
+                <a-entity sound="src: #select"></a-entity>
+                <a-entity sound="src: #deselect"></a-entity>
+                <a-entity sound="src: #place"></a-entity>
+            </a-entity>
+
+
+            <a-entity id='slide-one' position="0 3 -10">
+                <a-text scale="2 2 2" position="0 3 0" value="Welcome to the Chess VR App! \n This is the instructions page \n
+                All interactions in this app will use the trigger button right tracking controller" align="center"></a-text>
+                <a-image src="./images/demo-image.png" position="0 -1 0" scale="7 4 0"></a-image>
+                <a-text scale="2 2 2" position="0 -3.5 0" value="Use that trigger and point your laser at next to proceed" align="center"></a-text>
+            </a-entity>
+
+            <a-entity id='slide-two' position="10000000 3 -10">
+                <a-text scale="2 2 2" position="0 3 0" value="Use the laser on your controller to point and use it to select this piece.
+                \n Then click using your trigger on the green tile to pick where you want to move \n\n Green tiles show potential moves" align="center"></a-text>
+                <a-entity position="0 -3 1">
+                    <a-box scale="3.3 1 3.3" position="0 -0.51 -1" color="brown"></a-box>
+                    <a-plane class='tile-piece' id="10" position="0 0 0" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="11" position="0 0 -1" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="12" position="0 0 -2" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="20" position="1 0 0" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="21" position="1 0 -1" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="22" position="1 0 -2" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="00" position="-1 0 0" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="01" position="-1 0 -1" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="02"position="-1 0 -2" rotation="-90 0 0" color="black"></a-plane>
+                    <a-entity gltf-model="./pieces/rook-white.gltf" id="rook-two" position="0 0 -1" scale="0.2 0.2 0.2" class="chess-piece slide-2"></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <a-entity id='slide-three' position="10000000 3 -10">
+                <a-text scale="2 2 2" position="0 3 0" value="Nice! Now lets try capturing. \n
+                Move your rook so that its over the pawn. \n Keep in mind that you will have to click the square under the target to capture" align="center"></a-text>
+                <a-entity position="0 -3 1">
+                    <a-box scale="3.3 1 3.3" position="0 -0.51 -1" color="brown">
+                        <a-entity sound="src: #select"></a-entity>
+                        <a-entity sound="src: #deselect"></a-entity>
+                        <a-entity sound="src: #place"></a-entity>
+                    </a-box>
+                    <a-plane class='tile-piece' id="40" position="0 0 0" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="41" position="0 0 -1" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="42" position="0 0 -2" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="50" position="1 0 0" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="51" position="1 0 -1" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="52" position="1 0 -2" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="30" position="-1 0 0" rotation="-90 0 0" color="black"></a-plane>
+                    <a-plane class='tile-piece' id="31" position="-1 0 -1" rotation="-90 0 0" color="white"></a-plane>
+                    <a-plane class='tile-piece' id="32"position="-1 0 -2" rotation="-90 0 0" color="black"></a-plane>
+                    <a-entity gltf-model="./pieces/rook-white.gltf" id="rook-three" position="0 0 -1" scale="0.2 0.2 0.2" class="chess-piece"></a-entity>
+                    <a-entity gltf-model="./pieces/pawn-black.gltf" id="pawn-three" position="1 0 -1" scale="0.2 0.2 0.2" class="chess-piece"></a-entity>
+                    <a-box scale="1.1 1.1 3.3" color='brown' id='cap-zone' position="3 0 -1"></a-box>
+                </a-entity>
+            </a-entity>
+            <a-entity id='slide-four' position="10000000 3 -10">
+                <a-text scale="2 2 2" position="0 3 0" value="You've now completed the instructions! \n
+                Click next or skip to go to the game!" align="center"></a-text>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>

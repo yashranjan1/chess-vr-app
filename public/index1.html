@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <script type="module" src="a-frame.js"></script>
+    <script type="module" src="chess.js"></script>
+    <script type="module" src="socket-client.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <!-- Sound assets -->
+        <audio id="select" src="./sound-assets/select.mp3"></audio>
+        <audio id="deselect" src="./sound-assets/deselect.mp3"></audio>
+        <audio id="place" src="./sound-assets/place.mp3"></audio>
+        <!-- Chess piece assets -->
+        <a-asset-item id="pawn-black" src="./pieces/pawn-black.gltf"></a-asset-item>
+        <a-asset-item id="pawn-white" src="./pieces/pawn-white.gltf"></a-asset-item>
+        <a-asset-item id="knight-black" src="./pieces/knight-black.gltf"></a-asset-item>
+        <a-asset-item id="knight-white" src="./pieces/knight-white.gltf"></a-asset-item>
+        <a-asset-item id="bishop-black" src="./pieces/bishop-black.gltf"></a-asset-item>
+        <a-asset-item id="bishop-white" src="./pieces/bishop-white.gltf"></a-asset-item>
+        <a-asset-item id="rook-black" src="./pieces/rook-black.gltf"></a-asset-item>
+        <a-asset-item id="rook-white" src="./pieces/rook-white.gltf"></a-asset-item>
+        <a-asset-item id="queen-black" src="./pieces/queen-black.gltf"></a-asset-item>
+        <a-asset-item id="queen-white" src="./pieces/queen-white.gltf"></a-asset-item>
+        <a-asset-item id="king-black" src="./pieces/king-black.gltf"></a-asset-item>
+        <a-asset-item id="king-white" src="./pieces/king-white.gltf"></a-asset-item>
+      </a-assets>
+
+      <!-- Camera Rig -->
+      <a-entity id="rig">
+          <a-entity id="camera"
+              camera 
+              look-controls="pointerLockEnabled: true" 
+              wasd-controls="fly:true"
+              send-location
+          >
+              <a-entity id="win-cam" move-tool raycaster="objects: .clickable, .reset, .chess-piece-obj, .tile-obj" position="0 0 -0.01" geometry="primitive:circle; radius:0.00005;" material="color:yellow">
+                  <a-entity id="box-gymbal" gymbal-box></a-entity>
+              </a-entity>
+          </a-entity>
+
+          <a-box opacity="0.5" class="reset" position="-7 -3 -7.5" rotation="0 45 0" width="6.5" height="1.5" id="reset-button">
+            <a-text class="draw-text" value="Draw/Reset" align="center"  scale="4 4 4"></a-text>
+            <a-text class="draw-text" value="Draw/Reset" rotation="0 180 0" align="center" scale="4 4 4"></a-text>
+          </a-box>          
+          
+          <a-entity oculus-touch-controls="hand: left" id="left-hand"></a-entity>
+          <a-entity move-tool laser-controls="hand: right" id="right-hand" raycaster="objects: .clickable, .reset, .chess-piece-obj, .tile-obj;  lineColor: red;"></a-entity>
+
+          
+      </a-entity>
+      
+      <a-entity position="-3.5 -3 -6" chess-board></a-entity>
+
+      <a-entity chess-pieces></a-entity>
+
+      <a-entity capture-zone></a-entity>
+
+      <a-entity position="0 -5 -10" environment="preset: goaland"></a-entity> 
+
+      <a-entity>
+        <a-text class="turn-text" value="White's Turn" align="center" scale="4 4 4" position="0 4 -9.5"></a-text>
+        <a-text class="turn-text" value="White's Turn" align="center" scale="4 4 4" position="0 4 -9.5" rotation="0 180 0"></a-text>
+      </a-entity>
+      <a-entity>
+        <a-text visible="false" class="check-text" value="Check" align="center" scale="4 4 4" position="0 3 -9.5"></a-text>
+        <a-text visible="false" class="check-text" value="Check" align="center" scale="4 4 4" position="0 3 -9.5" rotation="0 180 0"></a-text>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>

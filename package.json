@@ -1,0 +1,25 @@
+{
+  "name": "final-year-project",
+  "version": "1.0.0",
+  "description": "VR Chess",
+  "main": "a-frame.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/yash-ranjan/final-year-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/yash-ranjan/final-year-project/issues"
+  },
+  "homepage": "https://gitlab.com/yash-ranjan/final-year-project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "ws": "^8.12.1"
+  }
+}
